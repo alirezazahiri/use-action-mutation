@@ -1,0 +1,39 @@
+{
+  "name": "@luminex/use-action-mutation",
+  "version": "0.1.0",
+  "description": "Tiny React hook for server actions: mutate(), pending state, and success/error callbacks.",
+  "license": "MIT",
+  "author": "Alireza Zahiri",
+  "repository": { "type": "git", "url": "git+https://github.com/alirezazahiri/use-action-mutation.git" },
+  "bugs": { "url": "https://github.com/alirezazahiri/use-action-mutation/issues" },
+  "homepage": "https://github.com/alirezazahiri/use-action-mutation#readme",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --clean",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18 || ^19",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": { "node": ">=18.18" },
+  "keywords": ["react", "nextjs", "useActionState", "server actions", "hook", "mutation"]
+}
