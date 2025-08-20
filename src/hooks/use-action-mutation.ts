@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useTransition } from "react";
 import { useCallbackRef } from "./use-callback-ref";
 import { ServerActionState } from "../lib/utils";
 
@@ -41,10 +41,9 @@ export const useActionMutation = <T>(
   const onSuccessRef = useCallbackRef(onSuccess);
   const onErrorRef = useCallbackRef(onError);
 
-  const [formState, formAction, isPending] = useActionState(
-    action,
-    initialState ?? null
-  );
+  const [formState, formAction] = useActionState(action, initialState ?? null);
+
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     if (isPending) return;
@@ -56,11 +55,11 @@ export const useActionMutation = <T>(
     }
   }, [isPending, formState, onErrorRef, onSuccessRef]);
 
-  const mutate = (payload: FormData) => {
-    // You can also wrap this in startTransition, but not required.
-    // React docs: the returned action can be called manually. :contentReference[oaicite:2]{index=2}
-    formAction(payload);
-  };
+  const mutate = useCallbackRef((payload: FormData) => {
+    startTransition(async () => {
+      formAction(payload);
+    });
+  });
 
   return { mutate, isPending, data: formState };
 };
