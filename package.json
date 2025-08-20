@@ -1,6 +1,6 @@
 {
   "name": "@luminex/use-action-mutation",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tiny React hook for server actions: mutate(), pending state, and success/error callbacks.",
   "license": "MIT",
   "author": "Alireza Zahiri",
